@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 
 class QuoteController {
   final Map<String, String> headers = {
-    'Content-type': 'application/json',
+    'Content-Type': 'application/json',
     'Accept': 'application/json',
   };
 

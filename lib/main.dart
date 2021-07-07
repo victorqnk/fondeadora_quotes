@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fondeadora/controllers/quote.dart';
 import 'package:fondeadora/controllers/user.dart';
 import 'package:fondeadora/views/home.dart';
 import 'package:fondeadora/views/login.dart';
@@ -13,11 +12,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => UserController()),
-        Provider.value(value: QuoteController()),
-      ],
+    return ChangeNotifierProvider(
+      create: (context) => UserController(),
       child: MaterialApp(
         title: 'Fondeadora Coding Test',
         debugShowCheckedModeBanner: false,

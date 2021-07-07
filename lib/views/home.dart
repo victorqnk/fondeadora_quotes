@@ -49,7 +49,7 @@ class Home extends StatelessWidget {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 40.0),
                 child: FutureBuilder(
-                  future: context.read<QuoteController>().getQuote(),
+                  future: QuoteController().getQuote(),
                   builder: (context, AsyncSnapshot<Response> snapshot) {
                     if (snapshot.hasError) {
                       return Center(child: Text('Algo salió  mal'));
