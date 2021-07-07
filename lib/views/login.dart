@@ -37,69 +37,86 @@ class _LoginState extends State<Login> {
           style: TextStyle(color: Theme.of(context).primaryColor),
         ),
       ),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextFormField(
-                key: Key('email'),
-                controller: email,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(labelText: 'Email'),
-                validator: (val) {
-                  return EmailValidator.validate(val!.trim())
-                      ? null
-                      : 'Ingresa un email válido';
-                },
-                // onSaved: (val) {
-                //   email.text = val!.trim();
-                // },
-              ),
-              TextFormField(
-                controller: password,
-                obscureText: hidden ? true : false,
-                decoration: InputDecoration(
-                  labelText: 'Contraseña',
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        hidden = !hidden;
-                      });
-                    },
-                    icon: Icon(
-                      hidden ? Icons.visibility : Icons.visibility_off,
-                      size: 21.0,
-                    ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/card.png'),
+            colorFilter: ColorFilter.mode(
+              Colors.white,
+              BlendMode.dstATop,
+            ),
+            fit: BoxFit.cover,
+            alignment: Alignment.topLeft,
+          ),
+        ),
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextFormField(
+                  key: Key('email'),
+                  controller: email,
+                  autofocus: true,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(color: Colors.grey),
                   ),
-                ),
-                validator: (val) {
-                  return val!.isEmpty || val.length < 5
-                      ? 'Contraseña inválida'
-                      : null;
-                },
-                // onSaved: (val) {
-                //   password = val!.trim();
-                // },
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: ElevatedButton(
-                  child: const Text('Entrar'),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // _formKey.currentState!.save();
-                      context
-                          .read<UserController>()
-                          .login(email: email.text, password: password.text);
-                      Navigator.pushReplacementNamed(context, '/');
-                    }
+                  style: TextStyle(color: Colors.grey.shade600),
+                  validator: (val) {
+                    return EmailValidator.validate(val!.trim())
+                        ? null
+                        : 'Ingresa un email válido';
                   },
                 ),
-              ),
-            ],
+                TextFormField(
+                  controller: password,
+                  obscureText: hidden ? true : false,
+                  style: TextStyle(color: Colors.grey),
+                  decoration: InputDecoration(
+                    labelText: 'Contraseña',
+                    labelStyle: TextStyle(color: Colors.grey.shade600),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          hidden = !hidden;
+                        });
+                      },
+                      icon: Icon(
+                        hidden ? Icons.visibility : Icons.visibility_off,
+                        size: 21.0,
+                      ),
+                    ),
+                  ),
+                  validator: (val) {
+                    return val!.isEmpty || val.length < 5
+                        ? 'Contraseña inválida'
+                        : null;
+                  },
+                  // onSaved: (val) {
+                  //   password = val!.trim();
+                  // },
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: ElevatedButton(
+                    child: const Text('Entrar'),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        // _formKey.currentState!.save();
+                        context
+                            .read<UserController>()
+                            .login(email: email.text, password: password.text);
+                        Navigator.pushReplacementNamed(context, '/');
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

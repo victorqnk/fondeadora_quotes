@@ -52,7 +52,9 @@ class Home extends StatelessWidget {
                   future: QuoteController().getQuote(),
                   builder: (context, AsyncSnapshot<Response> snapshot) {
                     if (snapshot.hasError) {
-                      return Center(child: Text('Algo salió  mal'));
+                      return Center(
+                        child: Text('Algo salió mal, ¿tienes Internet?'),
+                      );
                     }
 
                     if (snapshot.connectionState == ConnectionState.waiting) {
